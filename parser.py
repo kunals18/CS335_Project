@@ -215,10 +215,10 @@ def p_ClassMemberDeclaration(p):
 						   | MethodDeclaration
 						   | ClassDeclaration
 						   | InterfaceDeclaration
-						   | COMMA'''
+						   | SEMICOLON'''
 
 def p_FieldDeclaration(p):
-	'''FieldDeclaration : FieldModifier_1 UnannType VariableDeclaratorList COMMA'''
+	'''FieldDeclaration : FieldModifier_1 UnannType VariableDeclaratorList SEMICOLON'''
 
 def p_FieldModifier(p):
 	'''FieldModifier : Annotation 
@@ -371,8 +371,7 @@ def p_ExplicitConstructorInvocation(p):
 								  | Primary DOT TypeArguments_1 SUPER LEFT_PAREN ArgumentList_1 RIGHT_PAREN SEMICOLON'''
 
 def p_EnumDeclaration(p):
-	'''EnumDeclaration : ClassModifier_1 ENUM Identifier Superinterfaces_1
-					| EnumBody'''
+	'''EnumDeclaration : ClassModifier_1 ENUM Identifier Superinterfaces_1 EnumBody'''
 
 def p_EnumBody(p):
 	'''EnumBody : LEFT_CURL EnumConstantList_1 comma_1 EnumBodyDeclarations_1 RIGHT_CURL'''
@@ -394,7 +393,7 @@ def p_EnumConstantModifier(p):
 	'''EnumConstantModifier : Annotation'''
 
 def p_EnumBodyDeclarations(p):
-	'''EnumBodyDeclarations : COMMA ClassBodyDeclaration_1
+	'''EnumBodyDeclarations : SEMICOLON ClassBodyDeclaration_1
 '''
 
 #Products of 9
@@ -432,7 +431,7 @@ def p_InterfaceMemberDeclaration(p):
 								| SEMICOLON'''
 
 def p_ConstantDeclaration(p):
-	'''ConstantDeclaration : ConstantModifier_1 UnannType VariableDeclaratorList'''
+	'''ConstantDeclaration : ConstantModifier_1 UnannType VariableDeclaratorList SEMICOLON'''
 
 def p_ConstantModifier(p):
 	'''ConstantModifier : Annotation
@@ -577,10 +576,10 @@ def p_EmptyStatement(p):
 	'''EmptyStatement : SEMICOLON'''
 
 def p_LabeledStatement(p):
-	'''LabeledStatement : Identifier SEMICOLON Statement'''
+	'''LabeledStatement : Identifier COLON Statement'''
 
 def p_LabeledStatementNoShortIf(p):
-	'''LabeledStatementNoShortIf : Identifier SEMICOLON StatementNoShortIf'''
+	'''LabeledStatementNoShortIf : Identifier COLON StatementNoShortIf'''
 
 def p_ExpressionStatement(p):
 	'''ExpressionStatement : StatementExpression SEMICOLON'''
@@ -1209,3 +1208,4 @@ def p_error(p):
 parser = yacc.yacc()
 s = data
 result = parser.parse(s, debug = True)
+# result = parser.parse(s)
